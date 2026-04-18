@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vênus Concept Store | Moda para toda a Família</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-creme: #F8F6F2; 
+            --dark: #121212;
+            --gold: #C5A059;
+            --white: #FFFFFF;
+            --glass: rgba(248, 246, 242, 0.9);
+            --shadow: 0 10px 40px rgba(0,0,0,0.06);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--bg-creme); color: var(--dark); line-height: 1.6; overflow-x: hidden; }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed; top: 0; width: 100%; height: 80px;
+            background: var(--glass); backdrop-filter: blur(10px);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 5%; z-index: 1000; box-shadow: var(--shadow);
+        }
+        .logo { font-size: 1.4rem; font-weight: 700; color: var(--dark); text-transform: uppercase; letter-spacing: 3px; }
+        nav { display: flex; gap: 30px; position: absolute; left: 50%; transform: translateX(-50%); }
+        nav a { text-decoration: none; color: var(--dark); font-weight: 500; font-size: 0.8rem; transition: var(--transition); text-transform: uppercase; letter-spacing: 1px; }
+        nav a:hover { color: var(--gold); }
+
+        .btn-bag {
+            background: var(--dark); color: var(--white); padding: 12px 20px;
+            border-radius: 4px; border: none; cursor: pointer;
+            display: flex; align-items: center; gap: 10px; font-weight: 600;
+            transition: var(--transition); position: relative;
+        }
+        .btn-bag:hover { background: var(--gold); transform: translateY(-2px); }
+        .cart-badge {
+            position: absolute; top: -5px; right: -5px; background: var(--gold);
+            color: white; font-size: 0.7rem; width: 18px; height: 18px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        }
+
+        /* --- HERO --- */
+        .hero {
+            height: 100vh; min-height: 750px;
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), 
+                        url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center;
+            align-items: center; text-align: center; color: var(--white); padding: 0 20px;
+        }
+        .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 5px; }
+        .hero p { font-size: 1.1rem; margin-bottom: 40px; opacity: 0.9; font-weight: 300; text-transform: uppercase; letter-spacing: 2px; }
+        .hero-btns { display: flex; gap: 20px; }
+        .btn-primary { background: var(--white); color: var(--dark); padding: 18px 40px; text-decoration: none; font-weight: 700; transition: var(--transition); text-transform: uppercase; }
+        .btn-primary:hover { background: var(--gold); color: white; }
+
+        /* --- CATEGORIAS --- */
+        .sections { padding: 100px 5%; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 2.2rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; }
+        .section-header p { color: var(--gold); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; }
+
+        .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; margin-bottom: 80px; }
+        .product-card {
+            background: var(--white); transition: var(--transition);
+            display: flex; flex-direction: column; position: relative;
+        }
+        .product-card:hover { transform: translateY(-5px); }
+        .img-wrapper { width: 100%; height: 400px; overflow: hidden; position: relative; background: #eee; }
+        .product-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s ease; }
+        .product-card:hover img { transform: scale(1.05); }
+        
+        .badge {
+            position: absolute; top: 15px; left: 15px; background: var(--dark);
+            color: white; padding: 5px 12px; font-size: 0.6rem;
+            font-weight: 700; z-index: 2; text-transform: uppercase;
+        }
+
+        .info { padding: 20px; text-align: center; }
+        .info h3 { font-size: 0.9rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .price { font-size: 1.1rem; font-weight: 700; color: var(--gold); margin-bottom: 15px; }
+        
+        .size-selector { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
+        .size-selector span { 
+            border: 1px solid #ddd; padding: 5px 10px; font-size: 0.7rem; cursor: pointer; transition: 0.2s;
+        }
+        .size-selector span:hover { border-color: var(--dark); }
+
+        .btn-add {
+            width: 100%; background: var(--dark); color: white; border: none;
+            padding: 12px; font-weight: 600; cursor: pointer; transition: var(--transition); text-transform: uppercase; font-size: 0.7rem;
+        }
+        .btn-add:hover { background: var(--gold); }
+
+        /* --- PROMO --- */
+        .promo-banner {
+            margin: 0 5% 100px; background: #121212;
+            padding: 80px 40px; color: white; text-align: center; position: relative; overflow: hidden;
+        }
+        .promo-banner h2 { font-size: 2.5rem; margin-bottom: 20px; letter-spacing: 5px; }
+
+        /* --- SOBRE --- */
+        .about { padding: 100px 5%; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .about-content h2 { font-size: 2.5rem; margin-bottom: 25px; text-transform: uppercase; }
+
+        /* --- FOOTER --- */
+        footer { background: #121212; color: white; padding: 80px 5% 40px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-bottom: 50px; }
+        .footer-col h4 { margin-bottom: 25px; color: var(--gold); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; color: #666; font-size: 0.8rem; }
+        .social-links a { color: var(--gold); font-size: 1.2rem; margin-right: 15px; }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            position: fixed; right: -100%; top: 0; width: 400px; height: 100%;
+            background: var(--white); z-index: 2000; box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1); display: flex; flex-direction: column; padding: 30px;
+        }
+        .sidebar.active { right: 0; }
+        .cart-item { display: flex; gap: 15px; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+        .cart-item img { width: 70px; height: 90px; object-fit: cover; }
+        
+        .checkout-form { margin-top: 20px; }
+        .checkout-form input { width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #eee; border-radius: 0; background: #f9f9f9; }
+        .btn-finish { width: 100%; background: var(--dark); color: white; border: none; padding: 18px; font-weight: 700; cursor: pointer; text-transform: uppercase; }
+
+        /* --- WHATSAPP --- */
+        .wa-float {
+            position: fixed; bottom: 30px; right: 30px; background: #25d366;
+            color: white; width: 60px; height: 60px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 2rem;
+            z-index: 999; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 1024px) {
+            .product-grid { grid-template-columns: repeat(2, 1fr); }
+            nav { display: none; }
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .product-grid { grid-template-columns: 1fr; }
+            .about { grid-template-columns: 1fr; }
+            .sidebar { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Vênus <span>Concept</span></div>
+        <nav>
+            <a href="#feminino">Feminino</a>
+            <a href="#masculino">Masculino</a>
+            <a href="#infantil">Infantil</a>
+            <a href="#sobre">Nossa Loja</a>
+        </nav>
+        <button class="btn-bag" onclick="toggleSidebar()">
+            <i class="fas fa-shopping-bag"></i>
+            <div class="cart-badge" id="cart-count">0</div>
+        </button>
+    </header>
+
+    <section class="hero" id="home">
+        <h1>Coleção Essencial</h1>
+        <p>Atemporalidade e sofisticação para todos os momentos.</p>
+        <div class="hero-btns">
+            <a href="#feminino" class="btn-primary">Ver Coleção</a>
+        </div>
+    </section>
+
+    <section class="sections" id="feminino">
+        <div class="section-header">
+            <p>ESTILO PARA ELA</p>
+            <h2>Coleção Feminina</h2>
+        </div>
+        <div class="product-grid" id="feminino-grid"></div>
+    </section>
+
+    <section class="sections" id="masculino" style="background-color: #fff;">
+        <div class="section-header">
+            <p>ESTILO PARA ELE</p>
+            <h2>Coleção Masculina</h2>
+        </div>
+        <div class="product-grid" id="masculino-grid"></div>
+    </section>
+
+    <div class="promo-banner">
+        <p style="color: var(--gold); font-weight: 700; margin-bottom: 20px; letter-spacing: 3px;">SEASON SALE</p>
+        <h2>Até 40% OFF em Selecionados</h2>
+        <a href="#infantil" class="btn-primary" style="background: var(--gold); color: white;">Aproveitar</a>
+    </div>
+
+    <section class="sections" id="infantil">
+        <div class="section-header">
+            <p>ESTILO PARA CRIANÇAS</p>
+            <h2>Coleção Infantil</h2>
+        </div>
+        <div class="product-grid" id="infantil-grid"></div>
+    </section>
+
+    <section class="about" id="sobre">
+        <div class="about-content">
+            <h2>Vênus Concept</h2>
+            <p id="about-text"></p>
+            <br>
+            <p>Curadoria exclusiva de marcas internacionais e produção própria com os melhores tecidos do mercado.</p>
+            <div style="margin-top: 30px;">
+                <p><i class="fas fa-map-marker-alt" style="color: var(--gold);"></i> <span id="conf-addr"></span></p>
+                <p><i class="fas fa-phone" style="color: var(--gold);"></i> <span id="conf-phone"></span></p>
+            </div>
+        </div>
+        <div style="background: url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=800&q=80'); height: 400px; background-size: cover; border-radius: 4px;"></div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="color: white; margin-bottom: 20px;">Vênus</div>
+                <div class="social-links" id="social-links"></div>
+            </div>
+            <div class="footer-col">
+                <h4>Categorias</h4>
+                <ul><li>Feminino</li><li>Masculino</li><li>Infantil</li></ul>
+            </div>
+            <div class="footer-col">
+                <h4>Ajuda</h4>
+                <ul><li>Envios</li><li>Trocas</li><li>Guia de Tamanhos</li></ul>
+            </div>
+            <div class="footer-col">
+                <h4>Newsletter</h4>
+                <input type="email" placeholder="Seu e-mail" style="width: 100%; padding: 12px; border: none; background: #222; color: white;">
+            </div>
+        </div>
+        <div style="text-align:center; padding-top:40px; border-top:1px solid #222; font-size: 0.7rem; color: #444;">
+            &copy; 2026 Vênus Concept Store | All Rights Reserved.
+        </div>
+    </footer>
+
+    <a href="#" class="wa-float" id="wa-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <div class="sidebar" id="sidebar">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
+            <h3>Minha Sacola</h3>
+            <i class="fas fa-times" style="cursor:pointer;" onclick="toggleSidebar()"></i>
+        </div>
+        <div id="cart-list" style="flex-grow:1; overflow-y:auto;"></div>
+        <div class="checkout-form">
+            <div style="display:flex; justify-content:space-between; font-weight:700; margin-bottom:20px;">
+                <span>Subtotal:</span> <span id="total-price">R$ 0,00</span>
+            </div>
+            <input type="text" id="cust-name" placeholder="Nome">
+            <input type="text" id="cust-addr" placeholder="Endereço">
+            <button class="btn-finish" onclick="finishOrder()">Finalizar via WhatsApp</button>
+        </div>
+    </div>
+
+    <script>
+        const CONFIG = {
+            whatsapp: "5561995998749",
+            endereco: "xxxxxxxxxxxxxxxxxxxxxx - Brasília",
+            fone: "(61) 00000000000000",
+            sobre: "Desde 2018, a Vênus Concept traz o melhor da moda atemporal para Brasília. Nossa missão é vestir gerações com elegância e conforto.",
+            feminino: [
+                { id: 1, tag: "New", nome: "Vestido Midi Seda", preco: 389.00, img: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=500&q=80" },
+                { id: 2, tag: "Essential", nome: "Blazer Alfaiataria", preco: 450.00, img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=500&q=80" }
+            ],
+            masculino: [
+                { id: 3, tag: "New", nome: "Camisa Linho", preco: 259.00, img: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=500&q=80" },
+                { id: 4, tag: "Sale", nome: "Calça Chino", preco: 189.00, img: "https://i.pinimg.com/736x/01/34/d0/0134d026f453f1440ca50c67103b0f1f.jpg" }
+            ],
+            infantil: [
+                { id: 5, tag: "Kids", nome: "Conjunto Algodão", preco: 129.00, img: "https://i.pinimg.com/736x/71/ca/ec/71caecef7936c5de94840bf073537f23.jpg" },
+                { id: 6, tag: "Baby", nome: "Macacão Soft", preco: 89.00, img: "https://i.pinimg.com/736x/2e/83/76/2e8376dc2e0f075e907f6f4596aac84c.jpg" }
+            ]
+        };
+
+        let cart = [];
+
+        function init() {
+            const femGrid = document.getElementById('feminino-grid');
+            const mascGrid = document.getElementById('masculino-grid');
+            const kidsGrid = document.getElementById('infantil-grid');
+
+            CONFIG.feminino.forEach(p => femGrid.innerHTML += createCard(p));
+            CONFIG.masculino.forEach(p => mascGrid.innerHTML += createCard(p));
+            CONFIG.infantil.forEach(p => kidsGrid.innerHTML += createCard(p));
+
+            document.getElementById('conf-addr').innerText = CONFIG.endereco;
+            document.getElementById('conf-phone').innerText = CONFIG.fone;
+            document.getElementById('about-text').innerText = CONFIG.sobre;
+            document.getElementById('wa-float').href = `https://wa.me/${CONFIG.whatsapp}`;
+            document.getElementById('social-links').innerHTML = `<a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-facebook"></i></a>`;
+        }
+
+        function createCard(p) {
+            return `
+                <div class="product-card">
+                    <div class="img-wrapper">
+                        <span class="badge">${p.tag}</span>
+                        <img src="${p.img}">
+                    </div>
+                    <div class="info">
+                        <h3>${p.nome}</h3>
+                        <div class="price">R$ ${p.preco.toFixed(2).replace('.', ',')}</div>
+                        <button class="btn-add" onclick="addToCart(${p.id})">Adicionar à Sacola</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
+
+        function addToCart(id) {
+            const allItems = [...CONFIG.feminino, ...CONFIG.masculino, ...CONFIG.infantil];
+            const item = allItems.find(x => x.id === id);
+            const inCart = cart.find(x => x.id === id);
+            if(inCart) inCart.qty++; else cart.push({...item, qty: 1});
+            updateCart();
+            if(!document.getElementById('sidebar').classList.contains('active')) toggleSidebar();
+        }
+
+        function updateCart() {
+            const list = document.getElementById('cart-list');
+            const total = document.getElementById('total-price');
+            const badge = document.getElementById('cart-count');
+            list.innerHTML = "";
+            let sum = 0, qty = 0;
+            cart.forEach((c, index) => {
+                sum += c.preco * c.qty; qty += c.qty;
+                list.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${c.img}">
+                        <div style="flex-grow:1"><strong>${c.nome}</strong><br><small>R$ ${c.preco.toFixed(2)}</small></div>
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <button style="border:none; padding:5px;" onclick="changeQty(${index}, -1)">-</button>
+                            <span>${c.qty}</span>
+                            <button style="border:none; padding:5px;" onclick="changeQty(${index}, 1)">+</button>
+                        </div>
+                    </div>
+                `;
+            });
+            badge.innerText = qty;
+            total.innerText = `R$ ${sum.toFixed(2).replace('.', ',')}`;
+        }
+
+        function changeQty(index, delta) {
+            cart[index].qty += delta;
+            if(cart[index].qty <= 0) cart.splice(index, 1);
+            updateCart();
+        }
+
+        function finishOrder() {
+            const n = document.getElementById('cust-name').value;
+            const a = document.getElementById('cust-addr').value;
+            if(!n || cart.length === 0) return alert("Preencha seu nome!");
+            let msg = `*PEDIDO VÊNUS CONCEPT*\n\n*Cliente:* ${n}\n*Endereço:* ${a}\n\n*PEÇAS:*\n`;
+            cart.forEach(c => msg += `- ${c.qty}x ${c.nome}\n`);
+            msg += `\n*TOTAL: ${document.getElementById('total-price').innerText}*`;
+            window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
